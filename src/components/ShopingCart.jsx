@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Avatar, Box, Grid, Typography } from '@mui/material'
 import { orange, grey, lightBlue } from '@mui/material/colors';
-import { increment } from '../features/cart/cartSlice'
+import { increment, decrement } from '../features/cart/cartSlice'
 
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -39,7 +39,9 @@ const ShopingCart = () => {
                                 <Grid item md={3} >
                                     <Box display="flex" alignItems="center">
                                         <Avatar sx={{ bgcolor: "grey", width: "30px", height: "30px", cursor: "pointer" }} variant="square"
-                                        >
+                                            onClick={() => dispatch(decrement(product))}
+                                       
+                                       >
                                             -
                                         </Avatar>
                                         <Typography px={2}>{product.quantity}</Typography>

@@ -38,7 +38,18 @@ export const cartSlice = createSlice({
             // }
             return state
 
-        }
+        },
+        decrement: (state, action) => {
+
+            const index = state.Products.findIndex((product) => {
+                return product.id === action.payload.id
+            })
+            // if (index !== -1) {
+                state.Products[index].quantity -= 1;
+            // }
+            return state
+
+        },
 
         // case "INCREMENT":
         //     product = action.payload.product;
@@ -62,6 +73,6 @@ export const cartSlice = createSlice({
     },
 })
 
-export const { individualProduct, addToCart, increment } = cartSlice.actions
+export const { individualProduct, addToCart, increment, decrement } = cartSlice.actions
 
 export default cartSlice.reducer

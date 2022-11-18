@@ -9,16 +9,30 @@ import { Link } from 'react-router-dom';
 
 const Details = () => {
     const product = useSelector((state) => state.product.product)
-    // const myproduct = useSelector((state) => state.counter.selectedProducts)
-    // if (myproduct[0].qty != undefined){}
-    //     console.log(myproduct[0].qty);
-    // console.log(product.id);
-    // let initialState;
+    const Products = useSelector((state) => state.cart.Products)
 
+
+    let productQty;
+    // if (Products.length > 0) {
+
+    let initialProduct = Products.find((prod) => {
+        return prod.id === product.id
+    })
+    if (initialProduct) {
+
+        productQty = initialProduct.quantity
+    }
+    else {
+        productQty = 1
+    }
+    // }
+    //  else {
+    //     productQty = 1
+    // }
 
     const dispatch = useDispatch()
 
-    const [qty, setQty] = useState(1)
+    const [qty, setQty] = useState(productQty)
     const decrement = () => {
         if (qty > 1) {
             setQty(qty - 1)
@@ -31,8 +45,6 @@ const Details = () => {
         objCopy.quantity = qty;
         dispatch(addToCart(objCopy))
     }
-
-
     return (
         <Box bgcolor="white" mt={10}>
             <Grid container spacing={2}>
@@ -76,13 +88,13 @@ const Details = () => {
                             </Button>
                         </Link>
                         <Link to={`/shoping-cart`} style={{ textDecoration: "none", width: "49%", }}>
-                        <Button size="large" sx={{ width: "100%", boxShadow: "none", borderRadius: "2px", textTransform: "capitalize", bgcolor: orange[700], color: "white", "&:hover": { bgcolor: orange[800] } }}
-                            // onClick={() => dispatch(addToCart({ product, qty }))}
-                            onClick={addtocart}
+                            <Button size="large" sx={{ width: "100%", boxShadow: "none", borderRadius: "2px", textTransform: "capitalize", bgcolor: orange[700], color: "white", "&:hover": { bgcolor: orange[800] } }}
+                                // onClick={() => dispatch(addToCart({ product, qty }))}
+                                onClick={addtocart}
 
-                        >
-                            Add to Cart
-                        </Button>
+                            >
+                                Add to Cart
+                            </Button>
                         </Link>
                     </Box>
                 </Grid>
