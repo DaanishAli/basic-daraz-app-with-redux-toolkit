@@ -1,27 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import img1 from '../../images/freshsale/img1.jpg'
-import img2 from '../../images/freshsale/img2.jpg'
-import img3 from '../../images/freshsale/img3.jpg'
-import img4 from '../../images/freshsale/img4.jpg'
-import img5 from '../../images/freshsale/img5.jpg'
-import img6 from '../../images/freshsale/img6.jpg'
 
 const initialState = {
-    products: [
-        { id: 1, image: img1, price: 2499, discount: 70, discountPrice: 749, quantity: 1, discription: "i12 Airpod_Airpods Wireless headphones Wireless handfree Wireless handsfree Wireless earphones Wireless bluetooth handfree Wireless headset Wireless earbuds Bluetooth headphones Bluetooth handfree Bluetooth handsfree Bluetooth earphones i7 i7s i11 " },
-        { id: 2, image: img2, price: 2500, discount: 48, discountPrice: 1299, quantity: 1, discription: "Wireless Headset S8_Bluetooth ear_bud Single Ear Multicolo " },
-        { id: 3, image: img3, price: 559, discount: 23, discountPrice: 430, quantity: 1, discription: "LOreal Paris Elvive Color Protect Shampoo 360 ML - For Colored Hair" },
-        { id: 4, image: img4, price: 649, discount: 25, discountPrice: 487, quantity: 1, discription: "iGarnier Color Naturals - 4 Brown Hair Color" },
-        { id: 5, image: img5, price: 500, discount: 59, discountPrice: 203, quantity: 1, discription: "Silicone Back Bath Shower Wash Body Belt Brush Bath Towel Exfoliating Body Brush For Bathroom Accessories Nylon Towel Body " },
-        { id: 6, image: img6, price: 1800, discount: 8, discountPrice: 1650, quantity: 1, discription: "Track Suits for Men 2 piece set Sweatsuit Hoodi    " },
-    ],
-    product: {},
-    selectedProducts: [],
+
+    Products: [],
     TotalPrice: 0,
     TotalQuantity: 0
 }
-
 export const cartSlice = createSlice({
     name: 'counter',
     initialState,
@@ -30,22 +15,52 @@ export const cartSlice = createSlice({
             return { ...state, product: action.payload }
         },
         addToCart: (state, action) => {
-            const check = state.selectedProducts.find((prevProd) => prevProd.product.id === action.payload.product.id)
+            const check = state.Products.find((prevProd) => prevProd.id === action.payload.id)
             if (check) {
                 return state
             } else {
-                const { product, qty } = action.payload
+                const product = action.payload
                 return {
                     ...state,
-                    selectedProducts: [...state.selectedProducts, action.payload],
-                    TotalPrice: state.TotalPrice + product.discountPrice * qty,
-                    TotalQuantity: state.TotalQuantity + qty,
+                    Products: [...state.Products, action.payload],
+                    TotalPrice: state.TotalPrice + product.discountPrice * product.quantity,
+                    TotalQuantity: state.TotalQuantity + product.quantity,
                 }
             }
         },
+        increment: (state, action) => {
+            let product = action.payload;
+            console.log(product);
+            // return {
+            //     ...state,
+            //     Products: [...state.Products],
+            //     TotalPrice: state.TotalPrice + product.discountPrice,
+            //     TotalQuantity: state.TotalQuantity + 1
+            // }
+        }
+
+        // case "INCREMENT":
+        //     product = action.payload.product;
+        //     TQuantity = state.TotalQuantity + 1;
+        //     TPrice = state.TotalPrice + product.discountPrice
+        //     product.quantity += 1
+        //     return { ...state, products: [...state.products], TotalPrice: TPrice, TotalQuantity: TQuantity }
+        //     break;
+
+        // case "DECREMENT":
+        //     product = action.payload.product;
+        //     if (product.quantity > 1) {
+        //         product.quantity -= 1
+        //         TQuantity = state.TotalQuantity - 1;
+        //         TPrice = state.TotalPrice - product.discountPrice
+        //         return { ...state, products: [...state.products], TotalPrice: TPrice, TotalQuantity: TQuantity }
+        //     } else {
+        //         return state;
+        //     }
+        //     break;
     },
 })
 
-export const { individualProduct, addToCart } = cartSlice.actions
+export const { individualProduct, addToCart, increment } = cartSlice.actions
 
 export default cartSlice.reducer

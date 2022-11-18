@@ -26,6 +26,14 @@ const Details = () => {
     }
     const increment = () => { setQty(qty + 1) }
 
+    const addtocart = () => {
+        const objCopy = { ...product }; // 👈️ create copy
+        objCopy.quantity = qty;
+        console.log(objCopy);
+        dispatch(addToCart(objCopy))
+    }
+
+
     return (
         <Box bgcolor="white" mt={10}>
             <Grid container spacing={2}>
@@ -68,14 +76,15 @@ const Details = () => {
                                 Buy Now
                             </Button>
                         </Link>
-                        <Link to={`/shoping-cart`} style={{ textDecoration: "none", width: "49%", }}>
-                            <Button size="large" sx={{ width: "100%", boxShadow: "none", borderRadius: "2px", textTransform: "capitalize", bgcolor: orange[700], color: "white", "&:hover": { bgcolor: orange[800] } }}
-                                onClick={() => dispatch(addToCart({ product, qty }))}
+                        {/* <Link to={`/shoping-cart`} style={{ textDecoration: "none", width: "49%", }}> */}
+                        <Button size="large" sx={{ width: "100%", boxShadow: "none", borderRadius: "2px", textTransform: "capitalize", bgcolor: orange[700], color: "white", "&:hover": { bgcolor: orange[800] } }}
+                            // onClick={() => dispatch(addToCart({ product, qty }))}
+                            onClick={addtocart}
 
-                            >
-                                Add to Cart
-                            </Button>
-                        </Link>
+                        >
+                            Add to Cart
+                        </Button>
+                        {/* </Link> */}
                     </Box>
                 </Grid>
                 <Grid item xs={6} md={4}>

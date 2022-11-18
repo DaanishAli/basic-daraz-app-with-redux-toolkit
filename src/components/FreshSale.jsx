@@ -10,7 +10,7 @@ import { individualProduct } from '../features/productSlice'
 const FreshSale = () => {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product.initProducts)
-    console.log(products);
+    // console.log(products);
 
     return (
         <Box >

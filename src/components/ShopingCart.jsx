@@ -2,13 +2,14 @@ import React from 'react'
 
 import { Avatar, Box, Grid, Typography } from '@mui/material'
 import { orange, grey, lightBlue } from '@mui/material/colors';
+import { increment } from '../features/cart/cartSlice'
 
 
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 const ShopingCart = () => {
-    const products = useSelector((state) => state.counter.selectedProducts)
+    const dispatch = useDispatch();
+    const products = useSelector((state) => state.cart.Products)
     return (
         <div>
             <Grid container spacing={2} mt={10}>
@@ -38,13 +39,12 @@ const ShopingCart = () => {
                                 <Grid item md={3} >
                                     <Box display="flex" alignItems="center">
                                         <Avatar sx={{ bgcolor: "grey", width: "30px", height: "30px", cursor: "pointer" }} variant="square"
-                                            // onClick={decrement}
                                         >
                                             -
                                         </Avatar>
                                         <Typography px={2}>{prod.qty}</Typography>
                                         <Avatar sx={{ bgcolor: "grey", width: "30px", height: "30px", cursor: "pointer" }} variant="square"
-                                            // onClick={increment}
+                                            onClick={() => dispatch(increment(prod))}
                                         >
                                             +
                                         </Avatar>
