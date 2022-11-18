@@ -29,7 +29,6 @@ const Details = () => {
     const addtocart = () => {
         const objCopy = { ...product }; // 👈️ create copy
         objCopy.quantity = qty;
-        console.log(objCopy);
         dispatch(addToCart(objCopy))
     }
 
@@ -76,7 +75,7 @@ const Details = () => {
                                 Buy Now
                             </Button>
                         </Link>
-                        {/* <Link to={`/shoping-cart`} style={{ textDecoration: "none", width: "49%", }}> */}
+                        <Link to={`/shoping-cart`} style={{ textDecoration: "none", width: "49%", }}>
                         <Button size="large" sx={{ width: "100%", boxShadow: "none", borderRadius: "2px", textTransform: "capitalize", bgcolor: orange[700], color: "white", "&:hover": { bgcolor: orange[800] } }}
                             // onClick={() => dispatch(addToCart({ product, qty }))}
                             onClick={addtocart}
@@ -84,7 +83,7 @@ const Details = () => {
                         >
                             Add to Cart
                         </Button>
-                        {/* </Link> */}
+                        </Link>
                     </Box>
                 </Grid>
                 <Grid item xs={6} md={4}>

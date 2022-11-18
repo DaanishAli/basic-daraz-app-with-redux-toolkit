@@ -29,14 +29,15 @@ export const cartSlice = createSlice({
             }
         },
         increment: (state, action) => {
-            let product = action.payload;
-            console.log(product);
-            // return {
-            //     ...state,
-            //     Products: [...state.Products],
-            //     TotalPrice: state.TotalPrice + product.discountPrice,
-            //     TotalQuantity: state.TotalQuantity + 1
+
+            const index = state.Products.findIndex((product) => {
+                return product.id === action.payload.id
+            })
+            // if (index !== -1) {
+                state.Products[index].quantity += 1;
             // }
+            return state
+
         }
 
         // case "INCREMENT":

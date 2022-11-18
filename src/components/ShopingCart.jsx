@@ -15,24 +15,24 @@ const ShopingCart = () => {
             <Grid container spacing={2} mt={10}>
                 <Grid item xs={6} md={8} >
 
-                    {products.map((prod, ind) => {
+                    {products.map((product, ind) => {
                         return (
                             <Grid container spacing={2} key={ind} bgcolor="white" >
                                 <Grid item md={2} >
                                     <Box>
-                                        <img src={prod.product.image} alt="" srcSet="" style={{ width: "100%" }} />
+                                        <img src={product.image} alt="" srcSet="" style={{ width: "100%" }} />
                                     </Box>
                                 </Grid>
                                 <Grid item md={5} >
                                     <Box>
-                                        <Typography className="hide-overflow-text">{prod.product.discription}</Typography>
+                                        <Typography className="hide-overflow-text">{product.discription}</Typography>
                                     </Box>
                                 </Grid>
                                 <Grid item md={2} >
                                     <Box>
-                                        <Typography sx={{ fontSize: "20px", color: orange[900] }}> Rs.{prod.product.discountPrice}</Typography>
-                                        <Typography sx={{ fontSize: "14px", textDecoration: "line-through", color: grey[500] }}> Rs.{prod.product.price}</Typography>
-                                        <Typography sx={{ fontSize: "14px", pl: 1 }}>-{prod.product.discount}%</Typography>
+                                        <Typography sx={{ fontSize: "20px", color: orange[900] }}> Rs.{product.discountPrice}</Typography>
+                                        <Typography sx={{ fontSize: "14px", textDecoration: "line-through", color: grey[500] }}> Rs.{product.price}</Typography>
+                                        <Typography sx={{ fontSize: "14px", pl: 1 }}>-{product.discount}%</Typography>
 
                                     </Box>
                                 </Grid>
@@ -42,9 +42,9 @@ const ShopingCart = () => {
                                         >
                                             -
                                         </Avatar>
-                                        <Typography px={2}>{prod.qty}</Typography>
+                                        <Typography px={2}>{product.quantity}</Typography>
                                         <Avatar sx={{ bgcolor: "grey", width: "30px", height: "30px", cursor: "pointer" }} variant="square"
-                                            onClick={() => dispatch(increment(prod))}
+                                            onClick={() => dispatch(increment(product))}
                                         >
                                             +
                                         </Avatar>
