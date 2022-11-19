@@ -17,6 +17,15 @@ export const cartSlice = createSlice({
         addToCart: (state, action) => {
             const check = state.Products.find((prevProd) => prevProd.id === action.payload.id)
             if (check) {
+                const index = state.Products.findIndex((product) => {
+                    return product.id === action.payload.id
+                })
+                const product = action.payload
+                state.TotalPrice = state.TotalPrice - (state.Products[index].discountPrice * state.Products[index].quantity) + (product.discountPrice * product.quantity)
+                state.TotalQuantity = ((state.TotalQuantity - state.Products[index].quantity) + product.quantity)
+
+                state.Products[index] = product;
+
                 return state
             } else {
                 const product = action.payload
@@ -33,46 +42,33 @@ export const cartSlice = createSlice({
             const index = state.Products.findIndex((product) => {
                 return product.id === action.payload.id
             })
-            // if (index !== -1) {
-                state.Products[index].quantity += 1;
-            // }
+            state.Products[index].quantity += 1;
+            state.TotalPrice = state.TotalPrice + action.payload.discountPrice;
+            state.TotalQuantity = state.TotalQuantity + 1
             return state
-
         },
+
         decrement: (state, action) => {
-
-            const index = state.Products.findIndex((product) => {
-                return product.id === action.payload.id
-            })
-            // if (index !== -1) {
+            if (action.payload.quantity > 1) {
+                const index = state.Products.findIndex((product) => {
+                    return product.id === action.payload.id
+                })
                 state.Products[index].quantity -= 1;
-            // }
-            return state
-
+                state.TotalPrice = state.TotalPrice - action.payload.discountPrice;
+                state.TotalQuantity = state.TotalQuantity - 1
+                return state
+            }
         },
-
-        // case "INCREMENT":
-        //     product = action.payload.product;
-        //     TQuantity = state.TotalQuantity + 1;
-        //     TPrice = state.TotalPrice + product.discountPrice
-        //     product.quantity += 1
-        //     return { ...state, products: [...state.products], TotalPrice: TPrice, TotalQuantity: TQuantity }
-        //     break;
-
-        // case "DECREMENT":
-        //     product = action.payload.product;
-        //     if (product.quantity > 1) {
-        //         product.quantity -= 1
-        //         TQuantity = state.TotalQuantity - 1;
-        //         TPrice = state.TotalPrice - product.discountPrice
-        //         return { ...state, products: [...state.products], TotalPrice: TPrice, TotalQuantity: TQuantity }
-        //     } else {
-        //         return state;
-        //     }
-        //     break;
+        removeToCart: (state, action) => {
+            const found = state.Products.filter(initproduct => initproduct.id !== action.payload.id)
+            state.TotalQuantity = state.TotalQuantity - action.payload.quantity;
+            state.TotalPrice = state.TotalPrice - (action.payload.discountPrice * action.payload.quantity)
+            state.Products = [...found]
+            return state
+        },
     },
 })
 
-export const { individualProduct, addToCart, increment, decrement } = cartSlice.actions
+export const { individualProduct, addToCart, increment, decrement, removeToCart } = cartSlice.actions
 
 export default cartSlice.reducer

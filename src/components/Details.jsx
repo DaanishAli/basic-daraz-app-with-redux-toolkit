@@ -82,14 +82,13 @@ const Details = () => {
                     <Box py={2} display="flex" sx={{ justifyContent: "space-between" }}>
                         <Link to={`/shoping-cart`} style={{ textDecoration: "none", width: "49%", }}>
                             <Button size="large" sx={{ width: "100%", boxShadow: "none", borderRadius: "2px", textTransform: "capitalize", bgcolor: lightBlue[300], color: "white", "&:hover": { bgcolor: lightBlue[400] } }}
-                                onClick={() => dispatch(addToCart({ product, qty }))}
+                                onClick={addtocart}
                             >
                                 Buy Now
                             </Button>
                         </Link>
                         <Link to={`/shoping-cart`} style={{ textDecoration: "none", width: "49%", }}>
                             <Button size="large" sx={{ width: "100%", boxShadow: "none", borderRadius: "2px", textTransform: "capitalize", bgcolor: orange[700], color: "white", "&:hover": { bgcolor: orange[800] } }}
-                                // onClick={() => dispatch(addToCart({ product, qty }))}
                                 onClick={addtocart}
 
                             >
