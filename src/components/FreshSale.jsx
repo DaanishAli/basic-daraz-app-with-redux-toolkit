@@ -24,7 +24,12 @@ const FreshSale = () => {
                     <Grid item md={2} xs={6} key={product.id} >
                         <Link to={`/details/${product.id}`} style={{ textDecoration: "none" }}>
                             <Box
-                                onClick={() => dispatch(individualProduct(product))}
+                                onClick={() => {
+                                    dispatch(individualProduct(product))
+
+                                    localStorage.setItem("product", JSON.stringify(product))
+                                }}
+
                                 sx={{
                                     cursor: "pointer",
                                     "&:hover": {

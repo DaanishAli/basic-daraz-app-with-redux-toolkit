@@ -3,18 +3,21 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { orange, grey, lightBlue } from '@mui/material/colors';
 import { addToCart } from '../features/cart/cartSlice'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
 const Details = () => {
-    const product = useSelector((state) => state.product.product)
+    const navigate = useNavigate();
+    // const product = useSelector((state) => state.product.product)
     const Products = useSelector((state) => state.cart.Products)
 
+    var retrievedObject = localStorage.getItem('product');
 
-    let productQty;
-    // if (Products.length > 0) {
+    let product = JSON.parse(retrievedObject)
 
+
+    let productQty
     let initialProduct = Products.find((prod) => {
         return prod.id === product.id
     })
@@ -25,10 +28,6 @@ const Details = () => {
     else {
         productQty = 1
     }
-    // }
-    //  else {
-    //     productQty = 1
-    // }
 
     const dispatch = useDispatch()
 
@@ -44,6 +43,11 @@ const Details = () => {
         const objCopy = { ...product }; // 👈️ create copy
         objCopy.quantity = qty;
         dispatch(addToCart(objCopy))
+    }
+    const toComponentB = () => {
+        const objCopy = { ...product }; // 👈️ create copy
+        objCopy.quantity = qty;
+        navigate('/buy-now', { state: objCopy });
     }
     return (
         <Box bgcolor="white" mt={10}>
@@ -80,13 +84,14 @@ const Details = () => {
                         </Avatar>
                     </Box>
                     <Box py={2} display="flex" sx={{ justifyContent: "space-between" }}>
-                        <Link to={`/shoping-cart`} style={{ textDecoration: "none", width: "49%", }}>
-                            <Button size="large" sx={{ width: "100%", boxShadow: "none", borderRadius: "2px", textTransform: "capitalize", bgcolor: lightBlue[300], color: "white", "&:hover": { bgcolor: lightBlue[400] } }}
-                                onClick={addtocart}
-                            >
-                                Buy Now
-                            </Button>
-                        </Link>
+                        {/* <Link to={`/shoping-cart`} style={{ textDecoration: "none", width: "49%", }}> */}
+                        <Button size="large" sx={{ width: "49%", boxShadow: "none", borderRadius: "2px", textTransform: "capitalize", bgcolor: lightBlue[300], color: "white", "&:hover": { bgcolor: lightBlue[400] } }}
+                            // onClick={addtocart}
+                            onClick={() => { toComponentB() }}
+                        >
+                            Buy Now
+                        </Button>
+                        {/* </Link> */}
                         <Link to={`/shoping-cart`} style={{ textDecoration: "none", width: "49%", }}>
                             <Button size="large" sx={{ width: "100%", boxShadow: "none", borderRadius: "2px", textTransform: "capitalize", bgcolor: orange[700], color: "white", "&:hover": { bgcolor: orange[800] } }}
                                 onClick={addtocart}

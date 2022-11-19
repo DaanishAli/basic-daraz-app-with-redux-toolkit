@@ -7,6 +7,7 @@ import { increment, decrement, removeToCart } from '../features/cart/cartSlice'
 
 
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const ShopingCart = () => {
     const dispatch = useDispatch();
@@ -73,6 +74,7 @@ const ShopingCart = () => {
                     </Grid>
                     <Grid item xs={6} md={4} >
                         <Box>
+                            <Typography variant="h5" align='center' mb={3}>Cart Summart</Typography>
                             <Typography>
                                 Total Quantity : {TotalQuantity}
                             </Typography>
@@ -82,7 +84,15 @@ const ShopingCart = () => {
                         </Box>
                     </Grid>
                 </Grid >
-                : "cart is empty"
+                :
+                <Box display="flex" justifyContent="center">
+                    <Box>
+                        <Typography variant="h4"> Your Cart is empty </Typography>
+                        <Link to="/">
+                            Continue Shopping
+                        </Link>
+                    </Box>
+                </Box>
             }
 
         </div >
