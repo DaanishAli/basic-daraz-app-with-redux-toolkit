@@ -2,7 +2,7 @@ import { Grid, Box, Typography, Avatar, Button } from '@mui/material';
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { orange, grey, lightBlue } from '@mui/material/colors';
-import { addToCart } from '../features/cart/cartSlice'
+import { addToCart, buyToProduct } from '../features/cart/cartSlice'
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -44,10 +44,16 @@ const Details = () => {
         objCopy.quantity = qty;
         dispatch(addToCart(objCopy))
     }
-    const toComponentB = () => {
+    // const toComponentB = () => {
+    //     const objCopy = { ...product }; // 👈️ create copy
+    //     objCopy.quantity = qty;
+    //     navigate('/buy-now', { state: objCopy });
+    // }
+
+    const buyproduct = () => {
         const objCopy = { ...product }; // 👈️ create copy
         objCopy.quantity = qty;
-        navigate('/buy-now', { state: objCopy });
+        dispatch(buyToProduct(objCopy))
     }
     return (
         <Box bgcolor="white" mt={10}>
@@ -84,14 +90,14 @@ const Details = () => {
                         </Avatar>
                     </Box>
                     <Box py={2} display="flex" sx={{ justifyContent: "space-between" }}>
-                        {/* <Link to={`/shoping-cart`} style={{ textDecoration: "none", width: "49%", }}> */}
-                        <Button size="large" sx={{ width: "49%", boxShadow: "none", borderRadius: "2px", textTransform: "capitalize", bgcolor: lightBlue[300], color: "white", "&:hover": { bgcolor: lightBlue[400] } }}
-                            // onClick={addtocart}
-                            onClick={() => { toComponentB() }}
-                        >
-                            Buy Now
-                        </Button>
-                        {/* </Link> */}
+                        <Link to={`/buy-now`} style={{ textDecoration: "none", width: "49%", }}>
+                            <Button size="large" sx={{ width: "100%", boxShadow: "none", borderRadius: "2px", textTransform: "capitalize", bgcolor: lightBlue[300], color: "white", "&:hover": { bgcolor: lightBlue[400] } }}
+                                // onClick={addtocart}
+                                onClick={buyproduct}
+                            >
+                                Buy Now
+                            </Button>
+                        </Link>
                         <Link to={`/shoping-cart`} style={{ textDecoration: "none", width: "49%", }}>
                             <Button size="large" sx={{ width: "100%", boxShadow: "none", borderRadius: "2px", textTransform: "capitalize", bgcolor: orange[700], color: "white", "&:hover": { bgcolor: orange[800] } }}
                                 onClick={addtocart}

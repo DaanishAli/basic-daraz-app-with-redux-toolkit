@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { Avatar, Box, Grid, IconButton, Typography } from '@mui/material'
+import { Avatar, Box, Button, Grid, IconButton, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { orange, grey } from '@mui/material/colors';
-import { increment, decrement, removeToCart } from '../features/cart/cartSlice'
+import { increment, decrement, removeToCart, addToProceed } from '../features/cart/cartSlice'
 
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -67,9 +67,7 @@ const ShopingCart = () => {
                                         </Box>
                                     </Grid>
                                 </Grid>
-                            )
-                        })}
-
+                            ) })}
 
                     </Grid>
                     <Grid item xs={6} md={4} >
@@ -82,6 +80,13 @@ const ShopingCart = () => {
                                 Total Price : {TotalPrice}
                             </Typography>
                         </Box>
+                        <Link to={`/buy-now`} style={{ textDecoration: "none", width: "49%", }}>
+
+                            <Button sx={{ bgcolor: orange[800], width: "100%", color: "white", "&:hover": { bgcolor: grey[500] } }}
+                                onClick={() => dispatch(addToProceed())}
+
+                            >Add to Proceed</Button>
+                        </Link>
                     </Grid>
                 </Grid >
                 :

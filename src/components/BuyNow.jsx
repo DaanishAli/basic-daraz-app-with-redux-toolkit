@@ -4,12 +4,17 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import React from 'react'
 import { useLocation } from 'react-router-dom';
 import { orange, grey, lightBlue } from '@mui/material/colors';
+import { useSelector, useDispatch } from 'react-redux';
+
 
 
 const BuyNow = () => {
-    const location = useLocation();
+    // const location = useLocation();
     // console.log(location.state)
-    let product = location.state
+    // let product = location.state
+    const products = useSelector((state) => state.cart.BuyProducts)
+    // console.log(products)
+
 
     return (
 
@@ -18,41 +23,41 @@ const BuyNow = () => {
             <Grid container spacing={2} mt={10} >
                 <Grid item xs={6} md={8} >
 
+                    {products.map((product, index) => (
 
-                    <Grid container spacing={2} bgcolor="white" alignItems="center" p={1}>
-                        <Grid item md={1} >
-                            <Box>
-                                <img src={product.image} alt="product.img" srcSet="" style={{ width: "100%" }} />
-                            </Box>
-                        </Grid>
-                        <Grid item md={5} >
-                            <Box>
-                                <Typography className="hide-overflow-text" sx={{ fontSize: "11px" }}>{product.discription}</Typography>
-                            </Box>
-                        </Grid>
-                        <Grid item md={3} >
-                            <Box>
-                                <Typography sx={{ fontSize: "12px" }}>Qty:{product.quantity}</Typography>
-
-                            </Box>
-                        </Grid>
-                        <Grid item md={3} >
-                            <Box display='flex' justifyContent='end'>
-                                <Box display='flex' alignItems='center' sx={{ bgcolor: grey[200], }}>
-                                    <Typography px={1} sx={{ textDecoration: "line-through", fontSize: "12px", color: grey[700] }}>Rs. {product.price}</Typography>
-                                    <Typography px={1} sx={{ fontSize: "12px", color: grey[700] }}>-{product.discount}%</Typography>
+                        <Grid container spacing={2} bgcolor="white" alignItems="center" p={1} key ={index} >
+                            <Grid item md={1} >
+                                <Box>
+                                    <img src={product.image} alt="product.img" srcSet="" style={{ width: "100%" }} />
                                 </Box>
-                                <Typography pl={2} sx={{ fontSize: "13px" }}>Rs. {product.discountPrice}</Typography>
+                            </Grid>
+                            <Grid item md={5} >
+                                <Box>
+                                    <Typography className="hide-overflow-text" sx={{ fontSize: "11px" }}>{product.discription}</Typography>
+                                </Box>
+                            </Grid>
+                            <Grid item md={3} >
+                                <Box>
+                                    <Typography sx={{ fontSize: "12px" }}>Qty:{product.quantity}</Typography>
 
-                            </Box>
+                                </Box>
+                            </Grid>
+                            <Grid item md={3} >
+                                <Box display='flex' justifyContent='end'>
+                                    <Box display='flex' alignItems='center' sx={{ bgcolor: grey[200], }}>
+                                        <Typography px={1} sx={{ textDecoration: "line-through", fontSize: "12px", color: grey[700] }}>Rs. {product.price}</Typography>
+                                        <Typography px={1} sx={{ fontSize: "12px", color: grey[700] }}>-{product.discount}%</Typography>
+                                    </Box>
+                                    <Typography pl={2} sx={{ fontSize: "13px" }}>Rs. {product.discountPrice}</Typography>
+
+                                </Box>
+                            </Grid>
+
                         </Grid>
-
-                    </Grid>
-
-
+                    ))}
 
                 </Grid>
-                <Grid item xs={6} md={4} >
+                {/* <Grid item xs={6} md={4} >
                     <Box>
                         <Typography variant="subtitle2" fontWeight={600} >Order Summart</Typography>
                         <Box display='flex' justifyContent='space-between'>
@@ -73,9 +78,9 @@ const BuyNow = () => {
                                 {product.quantity * product.discountPrice}
                             </Typography>
                         </Box>
-                        <Button sx={{bgcolor:orange[800] , width:"100%", color:"white", "&:hover":{bgcolor:grey[500]} }}>Place Order</Button>
+                        <Button sx={{ bgcolor: orange[800], width: "100%", color: "white", "&:hover": { bgcolor: grey[500] } }}>Place Order</Button>
                     </Box>
-                </Grid>
+                </Grid> */}
             </Grid >
 
 
