@@ -6,7 +6,6 @@ const initialState = {
     Products: [],
     TotalPrice: 0,
     TotalQuantity: 0,
-
     BuyProducts: []
 }
 export const cartSlice = createSlice({
@@ -66,18 +65,11 @@ export const cartSlice = createSlice({
             return state
         },
         buyToProduct: (state, action) => {
-            const index = state.BuyProducts.findIndex((product) => product.id === action.payload.id)
-            if (index >= 0) {
-                state.BuyProducts[index] = action.payload;
-                return state
-            } else {
-                state.BuyProducts = [action.payload]
-                return state
-            }
+            state.BuyProducts = [action.payload]
+            return state
         },
-        addToProceed: (state, action) => {
-            // console.log("chl rha");
-            state.BuyProducts = [...state.BuyProducts, ...state.Products]
+        addToProceed: (state) => {
+            state.BuyProducts = [...state.Products]
             return state
         }
     },
