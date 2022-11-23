@@ -4,8 +4,9 @@ import { Box } from '@mui/system'
 import { Grid, Typography } from '@mui/material'
 import { orange, grey } from '@mui/material/colors';
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { individualProduct } from '../features/productSlice'
+
 
 const FreshSale = () => {
     const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const FreshSale = () => {
 
     return (
         <Box >
+
             <Typography variant="h6" color="#757575">Flash Sale</Typography>
             <Grid container
                 columnSpacing={2}
@@ -41,7 +43,6 @@ const FreshSale = () => {
                                     <Typography className='hide-overflow-text' sx={{ fontSize: "14px" }}>
                                         {product.discription}</Typography>
                                     <Typography sx={{ fontSize: "18px", color: orange[900] }}>
-                                        {/* Rs.{product.price - (product.price * product.discount / 100)} */}
                                         Rs.{product.discountPrice}
 
                                     </Typography>
@@ -56,7 +57,6 @@ const FreshSale = () => {
                     </Grid>
                 ))}
             </Grid>
-
 
         </Box >
     )

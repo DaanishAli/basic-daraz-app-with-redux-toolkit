@@ -6,6 +6,7 @@ import Details from './components/Details';
 import ShopingCart from './components/ShopingCart';
 import Appbar from './components/Appbar';
 import BuyNow from './components/BuyNow';
+import PaymentForm from './payment/PaymentForm';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/details/:id" element={<Details/>} />
         <Route path="/shoping-cart" element={<ShopingCart/>} />
         <Route path="/buy-now" element={<BuyNow/>} />
+        <Route path="/payment" element={<PaymentForm/>} />
         <Route path="*" element={<h1>Sorry, Page Not Found</h1>}/>
       </Routes>
     </Box>

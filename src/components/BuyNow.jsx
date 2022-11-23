@@ -15,7 +15,6 @@ const BuyNow = () => {
     const TotalQuantity = useSelector((state) => state.cart.TotalQuantity)
     const TotalPrice = useSelector((state) => state.cart.TotalPrice)
 
-    // console.log(products);
     return (
 
         <div>
@@ -88,7 +87,10 @@ const BuyNow = () => {
                                     }
                                 </Typography>
                             </Box>
-                            <Button sx={{ bgcolor: orange[800], width: "100%", color: "white", "&:hover": { bgcolor: grey[500] } }}>Place Order</Button>
+
+                            <Link to={`/payment`} style={{ textDecoration: "none", width: "100%", }}>
+                                <Button sx={{ bgcolor: orange[800], width: "100%", color: "white", "&:hover": { bgcolor: grey[500] } }}>Place Order</Button>
+                            </Link>
                         </Box>
                     </Grid>
                 </Grid >
